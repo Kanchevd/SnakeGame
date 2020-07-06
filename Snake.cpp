@@ -1,7 +1,7 @@
 #include "Snake.h"
 
-SDL_Texture* apple;
-SDL_Rect sourceR, destR;
+SDL_Texture* apple, *snake;
+SDL_Rect sourceR, destApple, destSnake;
 
 Snake::Snake()
 {}
@@ -20,6 +20,8 @@ void Snake::init(const char* title, int xpos, int ypos, int width, int height, b
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
 		std::cout << "Initialised!" << std::endl;
 	
+		widthW = width;
+		heightW = height;
 
 		window = SDL_CreateWindow(title, xpos, ypos, width, height, SDL_WINDOW_SHOWN);
 		if (window) {
@@ -33,26 +35,32 @@ void Snake::init(const char* title, int xpos, int ypos, int width, int height, b
 
 		isRunning = true;
 	}
-	SDL_Surface* surface = IMG_Load("Textures/apple.png");
-	apple = SDL_CreateTextureFromSurface(renderer, surface);
-	SDL_FreeSurface(surface);
+	SDL_Surface* surfaceApple = IMG_Load("Textures/apple.png");
+	SDL_Surface* surfaceSnake = IMG_Load("Textures/snake.png");
+	apple = SDL_CreateTextureFromSurface(renderer, surfaceApple);
+	snake = SDL_CreateTextureFromSurface(renderer, surfaceSnake);
+	SDL_FreeSurface(surfaceApple);
+	SDL_FreeSurface(surfaceSnake);
+
+	destApple.h = 10;
+	destApple.w = 10;
+	destSnake.h = 10;
+	destSnake.w = 10;
+	
 }
 
 void Snake::update() 
 {
 	
-	destR.h = 16;
-	destR.w = 16;
-
 	// code to randomize apple spawn
-	SDL_DisplayMode DM;
-	SDL_GetCurrentDisplayMode(0, &DM);
+	int wBlock = widthW / 10 - 1, hBlock = heightW / 10 - 1;
+	destApple.x = (rand() % wBlock + 0)*10;
+	destApple.y = (rand() % hBlock + 0)*10;
 
-	int widthPlacement = rand() % DM.w + 0;
-	int heightPlacement = rand() % DM.h + 0;
-
-	destR.x = widthPlacement;
-	destR.y = heightPlacement;
+	destSnake.x = (wBlock / 2) * 10;
+	destSnake.y = (hBlock / 2) * 10;
+	if (destApple.x == destSnake.x && destApple.y == destSnake.y)
+		destSnake.h += 10;
 
 }
 
@@ -60,7 +68,9 @@ void Snake::render()
 {
 	SDL_RenderClear(renderer);
 	// add stuff
-	SDL_RenderCopy(renderer, apple, NULL, &destR);
+	SDL_RenderCopy(renderer, apple, NULL, &destApple);
+	SDL_RenderCopy(renderer, snake, NULL, &destSnake);
+
 	SDL_RenderPresent(renderer);
 }
 

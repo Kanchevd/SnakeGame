@@ -25,6 +25,8 @@ public:
 	bool running() { return isRunning; }
 
 private:
+	int widthW;
+	int heightW;
 	bool isRunning;
 	SDL_Window *window;
 	SDL_Renderer *renderer;

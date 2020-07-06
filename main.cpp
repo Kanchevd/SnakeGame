@@ -9,6 +9,13 @@
 Snake* snake = nullptr;
 int main(int argc, char *argv[])
 {   
+
+    const int FPS = 20;
+    const int frameDelay = 1000 / FPS;
+
+    Uint32 frameStart;
+    int frameTime;
+
     int width, height; 
 
     std::cout << "Enter width:";
@@ -24,10 +31,18 @@ int main(int argc, char *argv[])
     snake->init("Snake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, false);
 
     while (snake->running()) {
+
+        frameStart = SDL_GetTicks();
+
         snake->handleEvent();
         snake->update();
         snake->render();
 
+        frameTime = SDL_GetTicks() - frameStart;
+        if (frameDelay > frameTime) 
+        {
+            SDL_Delay(frameDelay - frameTime);
+        }
     }
 
     snake->clean();
