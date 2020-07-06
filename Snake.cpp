@@ -1,5 +1,8 @@
 #include "Snake.h"
 
+SDL_Texture* apple;
+SDL_Rect sourceR, destR;
+
 Snake::Snake()
 {}
 Snake::~Snake()
@@ -30,19 +33,34 @@ void Snake::init(const char* title, int xpos, int ypos, int width, int height, b
 
 		isRunning = true;
 	}
-	else {
-		isRunning = false;
-	}
-
+	SDL_Surface* surface = IMG_Load("Textures/apple.png");
+	apple = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
 }
 
 void Snake::update() 
-{}
+{
+	
+	destR.h = 16;
+	destR.w = 16;
+
+	// code to randomize apple spawn
+	SDL_DisplayMode DM;
+	SDL_GetCurrentDisplayMode(0, &DM);
+
+	int widthPlacement = rand() % DM.w + 0;
+	int heightPlacement = rand() % DM.h + 0;
+
+	destR.x = widthPlacement;
+	destR.y = heightPlacement;
+
+}
 
 void Snake::render()
 {
 	SDL_RenderClear(renderer);
 	// add stuff
+	SDL_RenderCopy(renderer, apple, NULL, &destR);
 	SDL_RenderPresent(renderer);
 }
 
