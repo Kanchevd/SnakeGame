@@ -28,7 +28,8 @@ int main(int argc, char *argv[])
     std::cin >> height;
     */
 
-    width = 800;
+    //delete when we get to res
+    width = 800; 
     height = 600;
 
     // make option for fullscreen! 
@@ -37,14 +38,15 @@ int main(int argc, char *argv[])
     
     snake->init("Snake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, false);
 
-    while (snake->running()) {
-
+    while (snake->running()) 
+    {
         frameStart = SDL_GetTicks();
 
         snake->handleEvent();
         snake->update();
         snake->render();
 
+        //frame management
         frameTime = SDL_GetTicks() - frameStart;
         if (frameDelay > frameTime) 
         {

@@ -6,8 +6,6 @@ public:
 	~GameObject();
 	void render();
 
-
-
 protected:
 	int xPos;
 	int yPos;

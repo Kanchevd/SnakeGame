@@ -2,11 +2,13 @@
 #include "TextureLoader.h"
 #include "GameObject.h"
 #include "AppleObject.h"
+#include "SnakeObject.h"
+
 //SDL_Texture* apple, *snake;
 //SDL_Rect sourceR, destApple, destSnake;
 
 AppleObject* apple;
-GameObject* snake;
+SnakeObject* snake;
 
 Snake::Snake()
 {}
@@ -22,18 +24,21 @@ void Snake::init(const char* title, int xpos, int ypos, int width, int height, b
 		fullscrn = SDL_WINDOW_FULLSCREEN;
 	}
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) 
+	{
 		std::cout << "Initialised!" << std::endl;
 	
 		widthW = width;
 		heightW = height;
 
 		window = SDL_CreateWindow(title, xpos, ypos, width, height, SDL_WINDOW_SHOWN);
-		if (window) {
+		if (window) 
+		{
 			std::cout << "Window created!" << std::endl;
 		}
 		renderer = SDL_CreateRenderer(window, -1, 0);
-		if (renderer) {
+		if (renderer) 
+		{
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 			std::cout << "Renderer created!" << std::endl;
 		}
@@ -45,13 +50,15 @@ void Snake::init(const char* title, int xpos, int ypos, int width, int height, b
 	int appleX, appleY;
 	std::tie(appleX, appleY) = apple->returnPos();
 
+	//creates objects, passes their starting positions and assets
 	apple = new AppleObject("Textures/apple.png", renderer, appleX, appleY);
-	snake = new GameObject("Textures/snake.png", renderer, 200, 200);
+	snake = new SnakeObject("Textures/snake.png", renderer, 200, 200);
 }
 
 void Snake::update() 
 {
 	apple->update();
+	snake->update(heightW, widthW);
 }
 
 void Snake::render()
@@ -86,6 +93,7 @@ void Snake::clean()
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 	delete apple;
+	delete snake;
 	std::cout << "Clean!" << std::endl;
 }
 

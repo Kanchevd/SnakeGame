@@ -23,12 +23,9 @@ GameObject::GameObject(const char* textureSheet, SDL_Renderer* ren, int x, int y
 }
 
 GameObject::~GameObject() 
-{
-
-}
+{}
 
 void GameObject::render()
 {
-	//std::cout << "Rendering!" << "\n";
 	SDL_RenderCopy(renderer, objTexture, &srcRect, &destRect);
 }
