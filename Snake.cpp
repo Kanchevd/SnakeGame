@@ -52,24 +52,12 @@ void Snake::init(const char* title, int xpos, int ypos, int width, int height, b
 void Snake::update() 
 {
 	apple->update();
-	/*
-		// code to randomize apple spawn
-		int wBlock = widthW / 10 - 1, hBlock = heightW / 10 - 1;
-		destApple.x = (rand() % wBlock + 0)*10;
-		destApple.y = (rand() % hBlock + 0)*10;
-
-		destSnake.x = (wBlock / 2) * 10;
-		destSnake.y = (hBlock / 2) * 10;
-		if (destApple.x == destSnake.x && destApple.y == destSnake.y)
-			destSnake.h += 10;
-	*/
 }
 
 void Snake::render()
 {
 	SDL_RenderClear(renderer);
 	
-	// add stuff
 	apple->render();
 	snake->render();
 
