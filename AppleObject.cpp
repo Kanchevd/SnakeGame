@@ -25,9 +25,6 @@ AppleObject::~AppleObject()
 
 void AppleObject::update() 
 {
-	xPos++;
-	yPos++;
-
 	//needed to change where it renders
 	destRect.x = xPos;
 	destRect.y = yPos;

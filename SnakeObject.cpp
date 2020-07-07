@@ -22,14 +22,15 @@ SnakeObject::~SnakeObject()
 
 void SnakeObject::update(int heightWindow, int widthWindow)
 {
+	int xMovement = 5, yMovement = 2;
 	//Pacmaning 
-	if (xPos + 5 > widthWindow)
+	if (xPos + xMovement > widthWindow)
 		xPos -= widthWindow;
-	if (yPos + 5 > heightWindow)
+	if (yPos + yMovement > heightWindow)
 		yPos -= heightWindow;
 
-	xPos+=5;
-	yPos+=2;
+	xPos+=xMovement;
+	yPos+=yMovement;
 
 	//needed to change where it renders
 	destRect.x = xPos;
