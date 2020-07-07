@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AppleObject.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="main.cpp" />

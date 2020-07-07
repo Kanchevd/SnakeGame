@@ -1,11 +1,11 @@
 #include "Snake.h"
 #include "TextureLoader.h"
 #include "GameObject.h"
-
+#include "AppleObject.h"
 //SDL_Texture* apple, *snake;
 //SDL_Rect sourceR, destApple, destSnake;
 
-GameObject* apple;
+AppleObject* apple;
 GameObject* snake;
 
 Snake::Snake()
@@ -40,17 +40,13 @@ void Snake::init(const char* title, int xpos, int ypos, int width, int height, b
 
 		isRunning = true;
 	}
-	/*
-	apple = TextureLoader::LoadTexture("Textures/apple.png", renderer);
-	snake = TextureLoader::LoadTexture("Textures/snake.png", renderer);
 
-	destApple.h = 10;
-	destApple.w = 10;
-	destSnake.h = 10;
-	destSnake.w = 10;
-	*/
-	apple = new GameObject("Textures/apple.png", renderer, 0, 0);
-	snake = new GameObject("Textures/apple.png", renderer, 0, 0);
+	//defines a starting position for apple
+	int appleX, appleY;
+	std::tie(appleX, appleY) = apple->returnPos();
+
+	apple = new AppleObject("Textures/apple.png", renderer, appleX, appleY);
+	snake = new GameObject("Textures/snake.png", renderer, 200, 200);
 }
 
 void Snake::update() 
@@ -75,6 +71,7 @@ void Snake::render()
 	
 	// add stuff
 	apple->render();
+	snake->render();
 
 	SDL_RenderPresent(renderer);
 }
@@ -100,8 +97,8 @@ void Snake::clean()
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
-	std::cout << "Clean!" << std::endl;
 	delete apple;
+	std::cout << "Clean!" << std::endl;
 }
 
 
