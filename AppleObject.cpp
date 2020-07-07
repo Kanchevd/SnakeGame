@@ -9,6 +9,7 @@ std::tuple<int,int> AppleObject::returnPos() {
 AppleObject::AppleObject(const char* textureSheet, SDL_Renderer* ren, int x, int y)
 	:GameObject(textureSheet, ren, x, y)
 {
+	//specifically for apple, override superclass
 	srcRect.h = 10;
 	srcRect.w = 10;
 	srcRect.x = 0;
@@ -18,7 +19,6 @@ AppleObject::AppleObject(const char* textureSheet, SDL_Renderer* ren, int x, int
 	destRect.w = srcRect.w;
 	destRect.x = xPos;
 	destRect.y = yPos;
-	//std::cout << "xpos dummy" << "\n";
 }
 AppleObject::~AppleObject()
 {

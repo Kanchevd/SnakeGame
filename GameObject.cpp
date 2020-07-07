@@ -10,7 +10,16 @@ GameObject::GameObject(const char* textureSheet, SDL_Renderer* ren, int x, int y
 	xPos = x;
 	yPos = y;
 
-	std::cout << textureSheet << "\n";
+	//defaults, to be overriden
+	srcRect.h = 10;
+	srcRect.w = 10;
+	srcRect.x = 0;
+	srcRect.y = 0;
+
+	destRect.h = srcRect.h;
+	destRect.w = srcRect.w;
+	destRect.x = xPos;
+	destRect.y = yPos;
 }
 
 GameObject::~GameObject() 
