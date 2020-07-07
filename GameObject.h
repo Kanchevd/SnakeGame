@@ -1,5 +1,5 @@
 #pragma once
-#include "Snake.h"
+#include "Game.h"
 class GameObject {
 public:
 	GameObject(const char* textureSheet, SDL_Renderer* ren, int x, int y);

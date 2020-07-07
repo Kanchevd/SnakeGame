@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Snake.h"
+#include "Game.h"
 
 class TextureLoader {
 public:

@@ -1,12 +1,12 @@
-#include "AppleObject.h"
+#include "Apple.h"
 
-std::tuple<int,int> AppleObject::returnPos() 
+std::tuple<int,int> Apple::returnPos() 
 {
 	int x = 100, y = 100; // will be changed to random
 	return std::tuple<int,int> (x, y);
 }
 
-AppleObject::AppleObject(const char* textureSheet, SDL_Renderer* ren, int x, int y)
+Apple::Apple(const char* textureSheet, SDL_Renderer* ren, int x, int y)
 	:GameObject(textureSheet, ren, x, y)
 {
 	//specifically for apple, override superclass
@@ -20,10 +20,10 @@ AppleObject::AppleObject(const char* textureSheet, SDL_Renderer* ren, int x, int
 	destRect.x = xPos;
 	destRect.y = yPos;
 }
-AppleObject::~AppleObject()
+Apple::~Apple()
 {}
 
-void AppleObject::update() 
+void Apple::update() 
 {
 	//needed to change where it renders
 	destRect.x = xPos;

@@ -1,100 +1,38 @@
 #include "Snake.h"
-#include "TextureLoader.h"
-#include "GameObject.h"
-#include "AppleObject.h"
-#include "SnakeObject.h"
 
-//SDL_Texture* apple, *snake;
-//SDL_Rect sourceR, destApple, destSnake;
 
-AppleObject* apple;
-SnakeObject* snake;
+Snake::Snake(const char* textureSheet, SDL_Renderer* ren, int x, int y)
+	:GameObject(textureSheet, ren, x, y)
+{
+	//specifically for Snake, override superclass
+	srcRect.h = 10;
+	srcRect.w = 10;
+	srcRect.x = 0;
+	srcRect.y = 0;
 
-Snake::Snake()
-{}
+	destRect.h = srcRect.h;
+	destRect.w = srcRect.w;
+	destRect.x = xPos;
+	destRect.y = yPos;
+}
 Snake::~Snake()
-{}
-
-void Snake::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
-	int fullscrn = 0;
-	if (fullscreen)
-	{
-		std::cout << "Game is in fullscreen!" << std::endl;
-		fullscrn = SDL_WINDOW_FULLSCREEN;
-	}
-
-	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) 
-	{
-		std::cout << "Initialised!" << std::endl;
-	
-		widthW = width;
-		heightW = height;
-
-		window = SDL_CreateWindow(title, xpos, ypos, width, height, SDL_WINDOW_SHOWN);
-		if (window) 
-		{
-			std::cout << "Window created!" << std::endl;
-		}
-		renderer = SDL_CreateRenderer(window, -1, 0);
-		if (renderer) 
-		{
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-			std::cout << "Renderer created!" << std::endl;
-		}
-
-		isRunning = true;
-	}
-
-	//defines a starting position for apple
-	int appleX, appleY;
-	std::tie(appleX, appleY) = apple->returnPos();
-
-	//creates objects, passes their starting positions and assets
-	apple = new AppleObject("Textures/apple.png", renderer, appleX, appleY);
-	snake = new SnakeObject("Textures/snake.png", renderer, 200, 200);
-}
-
-void Snake::update() 
-{
-	apple->update();
-	snake->update(heightW, widthW);
-}
-
-void Snake::render()
-{
-	SDL_RenderClear(renderer);
-	
-	apple->render();
-	snake->render();
-
-	SDL_RenderPresent(renderer);
-}
-
-void Snake::handleEvent()
-{
-	SDL_Event event;
-	SDL_PollEvent(&event);
-	switch (event.type)
-	{
-		case SDL_QUIT:
-			isRunning = false;
-			break;
-
-		default:
-			break;
-	}
 
 }
 
-void Snake::clean()
+void Snake::update(int heightWindow, int widthWindow)
 {
-	SDL_DestroyWindow(window);
-	SDL_DestroyRenderer(renderer);
-	SDL_Quit();
-	delete apple;
-	delete snake;
-	std::cout << "Clean!" << std::endl;
+	int xMovement = 5, yMovement = 2;
+	//Pacmaning 
+	if (xPos + xMovement > widthWindow)
+		xPos -= widthWindow;
+	if (yPos + yMovement > heightWindow)
+		yPos -= heightWindow;
+
+	xPos+=xMovement;
+	yPos+=yMovement;
+
+	//needed to change where it renders
+	destRect.x = xPos;
+	destRect.y = yPos;
 }
-
-
