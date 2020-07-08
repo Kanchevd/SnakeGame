@@ -2,7 +2,7 @@
 #include "Game.h"
 class GameObject {
 public:
-	GameObject(const char* textureSheet, SDL_Renderer* ren, int x, int y);
+	GameObject(const char* textureSheet, int x, int y);
 	~GameObject();
 	void render();
 
@@ -13,5 +13,4 @@ protected:
 
 private:
 	SDL_Texture* objTexture;
-	SDL_Renderer* renderer;
 };

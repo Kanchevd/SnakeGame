@@ -1,8 +1,8 @@
 #include "Snake.h"
 
 
-Snake::Snake(const char* textureSheet, SDL_Renderer* ren, int x, int y)
-	:GameObject(textureSheet, ren, x, y)
+Snake::Snake(const char* textureSheet, int x, int y)
+	:GameObject(textureSheet, x, y)
 {
 	//specifically for Snake, override superclass
 	srcRect.h = 10;

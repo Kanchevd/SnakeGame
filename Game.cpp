@@ -12,6 +12,8 @@ Game::Game()
 Game::~Game()
 {}
 
+SDL_Renderer* Game::renderer = nullptr;
+
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
 	int fullscrn = 0;
@@ -48,8 +50,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	std::tie(appleX, appleY) = apple->returnPos();
 
 	//creates objects, passes their starting positions and assets
-	apple = new Apple("Textures/apple.png", renderer, appleX, appleY);
-	snake = new Snake("Textures/snake.png", renderer, 200, 200);
+	apple = new Apple("Textures/apple.png", appleX, appleY);
+	snake = new Snake("Textures/snake.png", 200, 200);
 }
 
 void Game::update() 

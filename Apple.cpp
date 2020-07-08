@@ -6,8 +6,8 @@ std::tuple<int,int> Apple::returnPos()
 	return std::tuple<int,int> (x, y);
 }
 
-Apple::Apple(const char* textureSheet, SDL_Renderer* ren, int x, int y)
-	:GameObject(textureSheet, ren, x, y)
+Apple::Apple(const char* textureSheet, int x, int y)
+	:GameObject(textureSheet, x, y)
 {
 	//specifically for apple, override superclass
 	srcRect.h = 10;
