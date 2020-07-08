@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "GameObject.h"
 #include <tuple> // tuple, tie
@@ -11,3 +11,4 @@ public:
 	std::tuple<int,int> returnPos(); //will be used to determine random position of apple
 	void update();
 };
+*/

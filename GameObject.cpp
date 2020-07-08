@@ -1,4 +1,4 @@
-#include "GameObject.h"
+/*#include "GameObject.h"
 #include "TextureLoader.h"
 //#include <iostream>
 
@@ -28,3 +28,4 @@ void GameObject::render()
 {
 	SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
 }
+*/

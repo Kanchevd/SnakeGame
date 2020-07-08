@@ -1,3 +1,4 @@
+/*
 #include "Snake.h"
 
 
@@ -20,19 +21,13 @@ Snake::~Snake()
 
 }
 
+void Snake::setDirection(std::string newDirection)
+{
+	direction = newDirection;
+}
+
 void Snake::update(int heightWindow, int widthWindow)
 {
-	int xMovement = 5, yMovement = 2;
-	//Pacmaning 
-	if (xPos + xMovement > widthWindow)
-		xPos -= widthWindow;
-	if (yPos + yMovement > heightWindow)
-		yPos -= heightWindow;
-
-	xPos+=xMovement;
-	yPos+=yMovement;
-
-	//needed to change where it renders
-	destRect.x = xPos;
-	destRect.y = yPos;
+	
 }
+*/

@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "Game.h"
 class GameObject {
 public:
@@ -14,3 +14,4 @@ protected:
 private:
 	SDL_Texture* objTexture;
 };
+*/

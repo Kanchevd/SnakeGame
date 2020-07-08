@@ -1,4 +1,4 @@
-#include "Apple.h"
+/*#include "Apple.h"
 
 std::tuple<int,int> Apple::returnPos() 
 {
@@ -29,3 +29,4 @@ void Apple::update()
 	destRect.x = xPos;
 	destRect.y = yPos;
 }
+*/

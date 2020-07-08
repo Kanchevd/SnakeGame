@@ -24,10 +24,11 @@ public:
 
 	bool running() { return isRunning; }
 	static SDL_Renderer* renderer;
+	static SDL_Event event;
 
 private:
-	int widthW;
-	int heightW;
+	int windowWidth,windowHeight;
+	int tileWidth,tileHeight;
 	bool isRunning;
 	SDL_Window *window;
 	

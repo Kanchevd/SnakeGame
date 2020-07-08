@@ -1,10 +1,9 @@
 #include "Game.h"
 #include "TextureLoader.h"
-#include "GameObject.h"
-#include "Apple.h"
-#include "Snake.h"
+#include "Map.h"
+#include "SnakeNew.h"
 
-Apple* apple;
+Map* map;
 Snake* snake;
 
 Game::Game()
@@ -13,6 +12,7 @@ Game::~Game()
 {}
 
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -27,8 +27,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	{
 		std::cout << "Initialised!" << std::endl;
 	
-		widthW = width;
-		heightW = height;
+		windowWidth = width;
+		windowHeight = height;
+		tileWidth = windowWidth / 40;
+		tileHeight = windowHeight / 40;
 
 		window = SDL_CreateWindow(title, xpos, ypos, width, height, SDL_WINDOW_SHOWN);
 		if (window) 
@@ -46,44 +48,64 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 
 	//defines a starting position for apple
-	int appleX, appleY;
+	/*int appleX, appleY;
 	std::tie(appleX, appleY) = apple->returnPos();
 
+	
 	//creates objects, passes their starting positions and assets
 	apple = new Apple("Textures/apple.png", appleX, appleY);
 	snake = new Snake("Textures/snake.png", 200, 200);
+	*/
+	snake = new Snake();
+	snake->addNode(19, 19);
+
+	map = new Map(tileWidth, tileHeight);
+	map->editTile(19, 19, 1); //snake starting spot
+	map->editTile(3, 10, 2); //apple start
 }
 
 void Game::update() 
 {
-	apple->update();
-	snake->update(heightW, widthW);
+	snake->update(*snake);
+	map->update(*snake);
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
-	
-	apple->render();
-	snake->render();
+
+	map->drawMap();
 
 	SDL_RenderPresent(renderer);
 }
 
 void Game::handleEvent()
 {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type)
 	{
 		case SDL_QUIT:
 			isRunning = false;
 			break;
-
+		case SDL_KEYDOWN:
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_LEFT:
+				snake->setDirection("Left");
+				break;
+			case SDLK_RIGHT:
+				snake->setDirection("Right");
+				break;
+			case SDLK_UP:
+				snake->setDirection("Up");
+				break;
+			case SDLK_DOWN:
+				snake->setDirection("Down");
+				break;
+			}
 		default:
 			break;
 	}
-
 }
 
 void Game::clean()
@@ -91,7 +113,6 @@ void Game::clean()
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
-	delete apple;
 	delete snake;
 	std::cout << "Clean!" << std::endl;
 }
