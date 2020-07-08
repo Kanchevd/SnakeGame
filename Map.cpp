@@ -38,17 +38,28 @@ Map:: ~Map()
 }
 
 //editor for a single tile on the map
-void Map::editTile(int row, int column, int tile) 
+void Map::editTile(int column, int row, int tile) 
 {
 	map[row][column] = tile;
 }
 
+void Map::clearSnake(Snake snake)
+{
+	SnakeNode* curr = snake.head;
+	while (curr != NULL)
+	{
+		Map::editTile(curr->x, curr->y, 0);
+		curr = curr->next;
+	}
+}
 void Map::update(Snake snake)
 {
-	int x = snake.head->x;
-	int y = snake.head->y;
-
-	Map::editTile(x,y,1);
+	SnakeNode* curr = snake.head;
+	while (curr != NULL )
+	{
+		Map::editTile(curr->x, curr->y, 1);
+		curr = curr->next;
+	}
 }
 void Map::drawMap()
 {

@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
     */
 
     //delete when we get to res
-    width = 800; 
-    height = 800;
+    width = 600; 
+    height = 600;
 
     // make option for fullscreen! 
 
@@ -41,8 +41,6 @@ int main(int argc, char *argv[])
     while (game->running()) 
     {
         frameStart = SDL_GetTicks();
-
-        SDL_Delay(50);
         game->handleEvent();
         game->update();
         game->render();

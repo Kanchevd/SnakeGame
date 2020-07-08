@@ -12,6 +12,7 @@ public:
 	void drawMap();
 	void editTile(int row, int column, int type);
 	void update(Snake snake);
+	void clearSnake(Snake snake);
 
 private:
 	SDL_Rect src, dest;

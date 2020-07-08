@@ -2,7 +2,6 @@
 #include "TextureLoader.h"
 #include "Map.h"
 #include "SnakeNew.h"
-
 Map* map;
 Snake* snake;
 
@@ -40,7 +39,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		if (renderer) 
 		{
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 			std::cout << "Renderer created!" << std::endl;
 		}
 
@@ -66,8 +65,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 void Game::update() 
 {
+	SnakeNode* tail = snake->tail;
+	map->clearSnake(*snake);
 	snake->update(*snake);
 	map->update(*snake);
+	if (rand() % 50 + 1 == 1)
+		snake->addNode(tail->x, tail->y);
 }
 
 void Game::render()
@@ -102,9 +105,18 @@ void Game::handleEvent()
 			case SDLK_DOWN:
 				snake->setDirection("Down");
 				break;
+			case SDLK_q:
+				isRunning = false;
+				break;
+			
+			case SDLK_p:
+				snake->setDirection("");
+				break;
+			default:
+				break;
 			}
-		default:
-			break;
+	default:
+		break;
 	}
 }
 

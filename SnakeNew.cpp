@@ -25,8 +25,8 @@ void Snake::addNode(int x, int y)
     }
     else
     {
-        tail->next = tmp;
-        tail = tail->next;
+        tmp->next = head;
+        head = tmp;
     }
 }
 
@@ -35,17 +35,47 @@ void Snake::setDirection(std::string newDirection)
     direction = newDirection;
     std::cout << "New Direction:" << newDirection << "\n";
 }
-
 void Snake::update(Snake snake)
 {
-    if(direction=="Left")
-        snake.head->x--;
-    else if(direction == "Right")
-        snake.head->x++;
+    //std::cout << "Update open" << "\n";
+
+    SnakeNode* curr = snake.head;
+    while (curr->next != NULL)
+    {
+        curr->x = curr->next->x;
+        curr->y = curr->next->y;
+        //std::cout << curr->x <<":"<<curr->y << "\n";
+        curr = curr->next;
+    }
+    if (direction == "Left") 
+    {
+        if (curr->x == 0)
+            curr->x = 39 + 1;
+        
+        curr->x--;
+    }
+         
+    else if (direction == "Right")
+    {
+        if (curr->x == 39)
+            curr->x = 0 - 1;
+        
+        curr->x++;
+    }
     else if (direction == "Up")
-        snake.head->y++;
+    {
+        if (curr->y == 0)
+            curr->y = 39 + 1;
+        
+        curr->y--;
+    }
     else if (direction == "Down")
-        snake.head->y--;
-    std::cout << "Snake X:" << snake.head->x << "\n";
-    std::cout << "Snake Y:" << snake.head->y << "\n";
+    {
+        if (curr->y == 39)
+            curr->y = 0 - 1;
+        
+        curr->y++;
+    }
+    
+    std::cout << snake.head->x << ":" << snake.head->y << "\n";
 }
