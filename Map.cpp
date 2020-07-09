@@ -1,11 +1,11 @@
 #include "Map.h"
 #include "TextureLoader.h"
 
-Map::Map(int tileHeight, int tileWidth)
+Map::Map(int tileHeight, int tileWidth, Snake snake)
 {
 	//defines textures
-	snake = TextureLoader::LoadTexture("Textures/snake.png");
-	apple = TextureLoader::LoadTexture("Textures/apple.png");
+	snakeText = TextureLoader::LoadTexture("Textures/snake.png");
+	appleText = TextureLoader::LoadTexture("Textures/apple.png");
 
 	std::cout << "size of map:" << sizeof(map) << "\n";
 	std::cout << "size of map[0]:" << sizeof(map[0]) << "\n";
@@ -30,6 +30,13 @@ Map::Map(int tileHeight, int tileWidth)
 
 	//will be changed to draw on different blocks
 	dest.x = dest.y = 0;
+
+	SnakeNode* back = snakeBack = snake.head;
+	while (back != NULL)
+	{
+		Map::editTile(back->x, back->y, 1);
+		back = back->next;
+	}
 }
 
 Map:: ~Map()
@@ -43,24 +50,23 @@ void Map::editTile(int column, int row, int tile)
 	map[row][column] = tile;
 }
 
-void Map::clearSnake(Snake snake)
+int Map::getTile(int column, int row)
 {
-	SnakeNode* curr = snake.head;
-	while (curr != NULL)
-	{
-		Map::editTile(curr->x, curr->y, 0);
-		curr = curr->next;
-	}
+	return map[row][column];
 }
-void Map::update(Snake snake)
+
+void Map::getSnakeBack(Snake snake)
 {
-	SnakeNode* curr = snake.head;
-	while (curr != NULL )
-	{
-		Map::editTile(curr->x, curr->y, 1);
-		curr = curr->next;
-	}
+	Map::editTile(snakeBack->x, snakeBack->y, 0);
+	snakeBack = snake.head;
 }
+void Map::updateSnake(Snake snake)
+{
+	SnakeNode* front = snake.tail;
+	Map::editTile(front->x, front->y, 1);
+}
+
+
 void Map::drawMap()
 {
 	//0 - empty, 1 - snake, 2 - apple
@@ -80,10 +86,10 @@ void Map::drawMap()
 			switch (textureType)
 			{
 			case 1:
-				TextureLoader::draw(snake, src, dest);
+				TextureLoader::draw(snakeText, src, dest);
 				break;
 			case 2: 
-				TextureLoader::draw(apple, src, dest);
+				TextureLoader::draw(appleText, src, dest);
 				break;
 
 			default:

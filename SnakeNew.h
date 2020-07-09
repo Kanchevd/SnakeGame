@@ -18,6 +18,7 @@ public:
 	void addNode(int x, int y);
 	void setDirection(std::string newDirection);
 	void update(Snake snake);
+	int getLength(Snake snake);
 
 	std::string direction;
 	SnakeNode* head, * tail;

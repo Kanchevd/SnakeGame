@@ -16,9 +16,9 @@ public:
 	~Game();
 
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
-
+	bool checkCollision(int snakeSteppedOn);
 	void handleEvent();
-	void update();
+	void update(Game game);
 	void render();
 	void clean();
 

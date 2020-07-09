@@ -2,9 +2,9 @@
 
 Snake::Snake()
 {
-	head = NULL;
-	tail = NULL;
-	direction = "";
+    head = NULL;
+    tail = NULL;
+    direction = "Up";
 }
 Snake::~Snake() 
 {
@@ -32,8 +32,31 @@ void Snake::addNode(int x, int y)
 
 void Snake::setDirection(std::string newDirection)
 {
+    if (direction == newDirection)
+        return;
+    if (direction == "Left" && newDirection == "Right")
+        return;
+    if (direction == "Right" && newDirection == "Left")
+        return;
+    if (direction == "Up" && newDirection == "Down")
+        return;
+    if (direction == "Down" && newDirection == "Up")
+        return;
+
     direction = newDirection;
     std::cout << "New Direction:" << newDirection << "\n";
+}
+
+int Snake::getLength(Snake snake) 
+{
+    int length = 0;
+    SnakeNode* back = snake.head;
+    while (back != NULL)
+    {
+        length++;
+        back = back->next;
+    }
+    return length;
 }
 void Snake::update(Snake snake)
 {
@@ -44,7 +67,6 @@ void Snake::update(Snake snake)
     {
         curr->x = curr->next->x;
         curr->y = curr->next->y;
-        //std::cout << curr->x <<":"<<curr->y << "\n";
         curr = curr->next;
     }
     if (direction == "Left") 

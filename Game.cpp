@@ -46,33 +46,58 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		isRunning = true;
 	}
 
-	//defines a starting position for apple
-	/*int appleX, appleY;
-	std::tie(appleX, appleY) = apple->returnPos();
-
-	
-	//creates objects, passes their starting positions and assets
-	apple = new Apple("Textures/apple.png", appleX, appleY);
-	snake = new Snake("Textures/snake.png", 200, 200);
-	*/
 	snake = new Snake();
-	snake->addNode(19, 19);
 
-	map = new Map(tileWidth, tileHeight);
-	map->editTile(19, 19, 1); //snake starting spot
+	snake->addNode(19, 19);
+	snake->addNode(20, 19);
+	snake->addNode(21, 19);
+
+	map = new Map(tileWidth, tileHeight, *snake);
+
 	map->editTile(3, 10, 2); //apple start
 }
 
-void Game::update() 
+void Game::update(Game game) 
 {
-	SnakeNode* tail = snake->tail;
-	map->clearSnake(*snake);
-	snake->update(*snake);
-	map->update(*snake);
-	if (rand() % 50 + 1 == 1)
-		snake->addNode(tail->x, tail->y);
-}
+	SnakeNode* back = snake->head;
+	
+	map->getSnakeBack(*snake);
 
+	if (rand() % 50 + 1 == 1)
+		snake->addNode(back->x, back->y);
+
+	snake->update(*snake);
+
+	SnakeNode* front = snake->tail;
+
+	if (game.checkCollision(map->getTile(front->x, front->y)))
+	{
+		isRunning = false;
+		return;
+	}
+
+	map->updateSnake(*snake);
+
+	
+}
+bool Game::checkCollision(int snakeSteppedOn)
+{
+	switch (snakeSteppedOn)
+	{
+	case 1:
+		SDL_ShowSimpleMessageBox(NULL,
+			"Game Over",
+			"You stepped on yourself. Game Over.",
+			window);
+		return true;
+	case 2:
+		std::cout << "APPLE " << "\n";
+		break;
+	default:
+		break;
+	}
+	return false;
+}
 void Game::render()
 {
 	SDL_RenderClear(renderer);
@@ -112,6 +137,7 @@ void Game::handleEvent()
 			case SDLK_p:
 				snake->setDirection("");
 				break;
+
 			default:
 				break;
 			}
@@ -126,6 +152,7 @@ void Game::clean()
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 	delete snake;
+	delete map;
 	std::cout << "Clean!" << std::endl;
 }
 
