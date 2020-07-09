@@ -7,6 +7,7 @@ Snake* snake;
 
 Game::Game()
 {}
+
 Game::~Game()
 {}
 
@@ -69,7 +70,6 @@ void Game::update(Game game)
 	snake->update(*snake);
 
 	SnakeNode* front = snake->tail;
-
 	if (game.checkCollision(map->getTile(front->x, front->y)))
 	{
 		isRunning = false;
