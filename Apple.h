@@ -1,14 +1,17 @@
-/*#pragma once
-
-#include "GameObject.h"
+#pragma once
 #include <tuple> // tuple, tie
+#include <stdlib.h>
 
-class Apple:public GameObject {
+class Apple {
 public:
-	Apple(const char* textureSheet, int x, int y);
+	Apple();
 	~Apple();
 
-	std::tuple<int,int> returnPos(); //will be used to determine random position of apple
-	void update();
+	void newPosition();
+	int getWidth();
+	int getHeight();
+
+private:
+	int width;
+	int height;
 };
-*/

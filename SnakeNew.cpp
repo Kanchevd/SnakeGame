@@ -58,11 +58,11 @@ int Snake::getLength(Snake snake)
     }
     return length;
 }
-void Snake::update(Snake snake)
+void Snake::update()
 {
     //std::cout << "Update open" << "\n";
 
-    SnakeNode* curr = snake.head;
+    SnakeNode* curr = this->head;
     while (curr->next != NULL)
     {
         curr->x = curr->next->x;
@@ -98,6 +98,4 @@ void Snake::update(Snake snake)
         
         curr->y++;
     }
-    
-    std::cout << snake.head->x << ":" << snake.head->y << "\n";
 }

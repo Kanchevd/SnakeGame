@@ -14,7 +14,6 @@ public:
 	void updateSnake(Snake snake);
 	void getSnakeBack(Snake snake);
 	int getTile(int column, int row);
-	//int checkCollision(Snake snake);
 
 private:
 	SDL_Rect src, dest;

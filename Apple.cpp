@@ -1,32 +1,34 @@
-/*#include "Apple.h"
+#include "Apple.h"
 
-std::tuple<int,int> Apple::returnPos() 
+Apple::Apple() 
 {
-	int x = 100, y = 100; // will be changed to random
-	return std::tuple<int,int> (x, y);
+	do {
+		height = rand() %  39 + 0;
+	} while (height <= 18 && height >= 22);
+
+	do {
+		width = rand() % 39 + 0;
+	} while (width != 19);
 }
 
-Apple::Apple(const char* textureSheet, int x, int y)
-	:GameObject(textureSheet, x, y)
-{
-	//specifically for apple, override superclass
-	srcRect.h = 10;
-	srcRect.w = 10;
-	srcRect.x = 0;
-	srcRect.y = 0;
-
-	destRect.h = srcRect.h;
-	destRect.w = srcRect.w;
-	destRect.x = xPos;
-	destRect.y = yPos;
-}
 Apple::~Apple()
-{}
-
-void Apple::update() 
 {
-	//needed to change where it renders
-	destRect.x = xPos;
-	destRect.y = yPos;
+
 }
-*/
+
+int Apple::getWidth()
+{
+	return this->width;
+}
+
+int Apple::getHeight()
+{
+	return this->height;
+}
+
+void Apple::newPosition() 
+{
+	height = rand() % 39 + 0;
+	width = rand() % 39 + 0;
+	//return std::tuple<int, int>(height, width);
+}

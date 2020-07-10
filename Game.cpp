@@ -2,8 +2,11 @@
 #include "TextureLoader.h"
 #include "Map.h"
 #include "SnakeNew.h"
+#include "Apple.h"
+
 Map* map;
 Snake* snake;
+Apple* apple;
 
 Game::Game()
 {}
@@ -53,35 +56,25 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	snake->addNode(20, 19);
 	snake->addNode(21, 19);
 
+	apple = new Apple();
+
 	map = new Map(tileWidth, tileHeight, *snake);
 
-	map->editTile(3, 10, 2); //apple start
+	map->editTile(apple->getHeight(), apple->getWidth(), 2); //apple start
 }
 
-void Game::update(Game game) 
+void Game::update() 
 {
 	SnakeNode* back = snake->head;
 	
 	map->getSnakeBack(*snake);
 
-	if (rand() % 50 + 1 == 1)
-		snake->addNode(back->x, back->y);
-
-	snake->update(*snake);
+	snake->update();
 
 	SnakeNode* front = snake->tail;
-	if (game.checkCollision(map->getTile(front->x, front->y)))
-	{
-		isRunning = false;
-		return;
-	}
 
-	map->updateSnake(*snake);
+	int snakeSteppedOn = map->getTile(front->x, front->y);
 
-	
-}
-bool Game::checkCollision(int snakeSteppedOn)
-{
 	switch (snakeSteppedOn)
 	{
 	case 1:
@@ -89,14 +82,22 @@ bool Game::checkCollision(int snakeSteppedOn)
 			"Game Over",
 			"You stepped on yourself. Game Over.",
 			window);
-		return true;
+		isRunning = false;
+		return;
 	case 2:
-		std::cout << "APPLE " << "\n";
-		break;
+		snake->addNode(back->x, back->y);
+		do {
+			apple->newPosition();
+		} while (map->getTile(apple->getHeight(), apple->getWidth()) == 1
+		|| (front->x == apple->getHeight() && front->y == apple->getWidth()));
+		
+		map->editTile(apple->getHeight(), apple->getWidth(), 2);
+
 	default:
 		break;
 	}
-	return false;
+
+	map->updateSnake(*snake);
 }
 void Game::render()
 {
@@ -133,11 +134,7 @@ void Game::handleEvent()
 			case SDLK_q:
 				isRunning = false;
 				break;
-			
-			case SDLK_p:
-				snake->setDirection("");
-				break;
-
+		
 			default:
 				break;
 			}
@@ -153,6 +150,7 @@ void Game::clean()
 	SDL_Quit();
 	delete snake;
 	delete map;
+	delete apple;
 	std::cout << "Clean!" << std::endl;
 }
 
