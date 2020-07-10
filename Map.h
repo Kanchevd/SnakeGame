@@ -1,6 +1,6 @@
 #pragma once
 #include "Game.h";
-#include "SnakeNew.h";
+#include "Snake.h";
 
 
 class Map

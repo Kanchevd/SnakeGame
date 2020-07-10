@@ -1,16 +1,24 @@
-/*#pragma once
+#pragma once
+#include<string>
+#include<iostream>
 
-#include "GameObject.h"
-
-class Snake:public GameObject {
+class SnakeNode {
 public:
-	Snake(const char* textureSheet, int x, int y);
+	int x;
+	int y;
+	SnakeNode* next;
+};
+
+class Snake {
+
+public:
+	Snake();
 	~Snake();
 
+	void addNode(int x, int y);
 	void setDirection(std::string newDirection);
-	void update(int widthWindow, int heightWindow);
+	void update();
 
-private:
 	std::string direction;
+	SnakeNode* head, * tail;
 };
-*/

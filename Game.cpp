@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "TextureLoader.h"
 #include "Map.h"
-#include "SnakeNew.h"
+#include "Snake.h"
 #include "Apple.h"
 
 Map* map;
