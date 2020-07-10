@@ -19,6 +19,7 @@ private:
 	SDL_Rect src, dest;
 	SDL_Texture* snakeText;
 	SDL_Texture* appleText;
+	SDL_Texture* backgroundText;
 	SnakeNode* snakeBack;
 
 	int width;

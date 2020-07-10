@@ -6,6 +6,7 @@ Map::Map(int tileHeight, int tileWidth, Snake snake)
 	//defines textures
 	snakeText = TextureLoader::LoadTexture("Textures/snake.png");
 	appleText = TextureLoader::LoadTexture("Textures/apple.png");
+	backgroundText = TextureLoader::LoadTexture("Textures/background.png");
 
 	std::cout << "size of map:" << sizeof(map) << "\n";
 	std::cout << "size of map[0]:" << sizeof(map[0]) << "\n";
@@ -85,9 +86,14 @@ void Map::drawMap()
 
 			switch (textureType)
 			{
+			case 0:
+				TextureLoader::draw(backgroundText, src, dest);
+				break;
+
 			case 1:
 				TextureLoader::draw(snakeText, src, dest);
 				break;
+
 			case 2: 
 				TextureLoader::draw(appleText, src, dest);
 				break;

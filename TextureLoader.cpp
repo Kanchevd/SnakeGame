@@ -9,6 +9,21 @@ SDL_Texture* TextureLoader::LoadTexture(const char* texture)
 	return tex;
 }
 
+SDL_Texture* TextureLoader::LoadText(const char* text)
+{
+	if(TTF_Init()< 0)
+		std::cout << "Error " << "\n";
+
+	TTF_Font* Sans = TTF_OpenFont("Roboto.ttf", 24);
+	SDL_Color Black = { 0, 0, 0 };
+	SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, text, Black);
+	SDL_Texture* Message = SDL_CreateTextureFromSurface(Game::renderer, surfaceMessage);
+	TTF_Quit();
+
+	return Message;
+
+}
+
 void TextureLoader::draw(SDL_Texture* text, SDL_Rect src, SDL_Rect dest) 
 {
 	SDL_RenderCopy(Game::renderer, text, &src, &dest);

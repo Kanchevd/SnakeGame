@@ -8,7 +8,7 @@
 #include "SDL_image.h"
 #include <iostream>
 #include <stdlib.h> 
-
+#include "SDL_ttf.h"
 class Game {
 
 public:
@@ -20,6 +20,7 @@ public:
 	void update();
 	void render();
 	void clean();
+	void renderScore();
 
 	bool running() { return isRunning; }
 	static SDL_Renderer* renderer;
@@ -30,6 +31,7 @@ private:
 	int tileWidth,tileHeight;
 	bool isRunning;
 	SDL_Window *window;
+	int score;
 	
 };
 #endif // !Game_hpp

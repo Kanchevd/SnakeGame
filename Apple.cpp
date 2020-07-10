@@ -4,11 +4,11 @@ Apple::Apple()
 {
 	do {
 		height = rand() %  39 + 0;
-	} while (height <= 18 && height >= 22);
+	} while (height != 19);
 
 	do {
 		width = rand() % 39 + 0;
-	} while (width != 19);
+	} while (width <= 18 && width >= 22);
 }
 
 Apple::~Apple()

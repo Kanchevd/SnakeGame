@@ -5,6 +5,9 @@ Snake::Snake()
     head = NULL;
     tail = NULL;
     direction = "Up";
+    this->addNode(19, 19);
+    this->addNode(20, 19);
+    this->addNode(21, 19);
 }
 Snake::~Snake() 
 {

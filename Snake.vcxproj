@@ -82,8 +82,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>F:\Snake\SDL2_image-2.0.1\include;F:\Snake\SDL2\include;F:\SDL2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\Snake\SDL2_image-2.0.1\lib\x64;F:\Snake\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\Snake\SDL2_ttf-devel-2.0.15-VC\SDL2_ttf-2.0.15\include;F:\Snake\SDL2_image-2.0.1\include;F:\Snake\SDL2\include;F:\SDL2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\Snake\SDL2_ttf-devel-2.0.15-VC\SDL2_ttf-2.0.15\lib\x64;F:\Snake\SDL2_image-2.0.1\lib\x64;F:\Snake\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -136,15 +136,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>F:\Snake\SDL2_image-2.0.1\include;F:\Snake\SDL2\include;F:\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\Snake\SDL2_ttf-devel-2.0.15-VC\SDL2_ttf-2.0.15\include;F:\Snake\SDL2_image-2.0.1\include;F:\Snake\SDL2\include;F:\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>F:\Snake\SDL2_image-2.0.1\lib\x64;F:\Snake\SDL2\lib\x64;F:\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>F:\Snake\SDL2_ttf-devel-2.0.15-VC\SDL2_ttf-2.0.15\lib;F:\Snake\SDL2_image-2.0.1\lib\x64;F:\Snake\SDL2\lib\x64;F:\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_ttf.lib;SDL2.lib;SDL2_image.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

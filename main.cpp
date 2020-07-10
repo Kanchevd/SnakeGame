@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     */
 
     //delete when we get to res
-    width = 600; 
+    width = 800; 
     height = 600;
 
     // make option for fullscreen! 
