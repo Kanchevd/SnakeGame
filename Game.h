@@ -35,6 +35,7 @@ private:
 	bool isRunning;
 	SDL_Window *window;
 	int score;
+	double movementCap;
 	double movesPerSecond;
 	double timeToMove;
 	double passedTime;

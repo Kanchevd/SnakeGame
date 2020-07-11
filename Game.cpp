@@ -51,7 +51,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 		isRunning = true;
 	}
-
+	movementCap = 60.0;
 	movesPerSecond = 6;
 	timeToMove = 1000 / movesPerSecond;
 	passedTime = 0;
@@ -102,8 +102,12 @@ void Game::update(double frameTime, bool forced)
 		return;
 	case 2:
 		score++;
-		movesPerSecond+=0.5;
-		timeToMove = 1000 / movesPerSecond;
+		if (movesPerSecond < movementCap)
+		{
+			movesPerSecond += 0.5;
+			timeToMove = 1000 / movesPerSecond;
+		}
+			
 		snake->addNode(back->x, back->y);
 		do {
 			apple->newPosition();
@@ -141,8 +145,8 @@ void Game::renderSpeed()
 	std::string roundedSpeed = std::to_string(movesPerSecond);
 
 	//truncates additional numbers after floating point
-	if (roundedSpeed.size() > 10)
-		roundedSpeed.erase(10);
+	if (roundedSpeed.size() > 4)
+		roundedSpeed.erase(4);
 
 	std::string speedStr = "Speed:" + roundedSpeed;
 
@@ -154,10 +158,10 @@ void Game::renderSpeed()
 	SDL_Rect src, dest;
 
 	src.x = src.y = 0;
-	src.w = dest.w = ((windowWidth - windowHeight) / 2);
-	src.h = dest.h = src.w/2.5;
+	src.w = dest.w = ((windowWidth - windowHeight) / 4)*3;
+	src.h = dest.h = src.w/4;
 
-	dest.x = windowHeight + ((windowWidth - windowHeight) / 4);
+	dest.x = windowHeight + ((windowWidth - windowHeight) / 8);
 	dest.y = windowHeight / 2;
 
 	TextureLoader::draw(score, src, dest);
@@ -187,27 +191,31 @@ void Game::handleEvent()
 			{
 			case SDLK_LEFT:
 				if(snake->setDirection("Left"))
+				{ 
 					this->update(0, true);
 					SDL_Delay(20);
-
+				}
 				break;
 			case SDLK_RIGHT:
 				if (snake->setDirection("Right"))
+				{ 
 					this->update(0, true);
 					SDL_Delay(20);
-
+				}
 				break;
 			case SDLK_UP:
 				if (snake->setDirection("Up"))
+				{ 
 					this->update(0, true);
 					SDL_Delay(20);
-
+				}
 				break;
 			case SDLK_DOWN:
 				if(snake->setDirection("Down"))
+				{ 
 					this->update(0, true);
 					SDL_Delay(20);
-
+				}
 				break;
 			case SDLK_q:
 				isRunning = false;
