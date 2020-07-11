@@ -8,9 +8,6 @@ Map::Map(int tileHeight, int tileWidth, Snake snake)
 	appleText = TextureLoader::LoadTexture("Textures/apple.png");
 	backgroundText = TextureLoader::LoadTexture("Textures/background.png");
 
-	std::cout << "size of map:" << sizeof(map) << "\n";
-	std::cout << "size of map[0]:" << sizeof(map[0]) << "\n";
-
 	//fills the 40x40 array with 0s
 	for (int row = 0; row < 40; row++)
 	{

@@ -16,7 +16,7 @@ public:
 	~Snake();
 
 	void addNode(int x, int y);
-	void setDirection(std::string newDirection);
+	bool setDirection(std::string newDirection);
 	void update();
 
 	std::string direction;

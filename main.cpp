@@ -1,40 +1,25 @@
-// Snake.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-//#include <iostream>
 #include "SDL.h"
 #include "Game.h"
-//using namespace std;
+#include "ResolutionManager.h"
 
-Game* game = nullptr;
+//Game* game = nullptr;
 int main(int argc, char *argv[])
 {   
-
-    const int FPS = 10;
+    /*  
+    //necessary for capped fps
+    const int FPS = 120;
     const int frameDelay = 1000 / FPS;
-
-    Uint32 frameStart;
-    int frameTime;
-
-    int width, height; 
-
-    /* 
-    commented out during dev
-
-    std::cout << "Enter width:";
-    std::cin >> width;
-
-    std::cout << "Enter height:";
-    std::cin >> height;
     */
 
-    //delete when we get to res
-    width = 800; 
-    height = 600;
+    Uint32 frameStart;
+    int frameTime = 0, timeTracker = 0, fps = 0;
 
-    // make option for fullscreen! 
+    ResolutionManager* resManager = new ResolutionManager();
 
-    game = new Game();
+    int width, height;
+    std::tie(width, height) = resManager->chooseResolution();
+
+    Game* game = new Game();
     
     game->init("Snake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, false);
 
@@ -42,19 +27,33 @@ int main(int argc, char *argv[])
     {
         frameStart = SDL_GetTicks();
         game->handleEvent();
-        game->update();
+        game->update(frameTime, false); //first frame is skipped 
         game->render();
 
-        //frame management
+        /*
+        //frame management for capped fps
         frameTime = SDL_GetTicks() - frameStart;
         if (frameDelay > frameTime) 
         {
             SDL_Delay(frameDelay - frameTime);
         }
+        */
+
+        frameTime = SDL_GetTicks() - frameStart;
+
+        timeTracker += frameTime;
+        fps++;
+
+        if (timeTracker >= 1000)
+        {
+            std::cout << "FPS:" << fps << "\n";
+            fps = 0;
+            timeTracker -= 1000;
+        }
     }
 
     game->clean();
     delete game;
-
+    delete resManager;
     return 0;
 }

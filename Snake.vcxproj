@@ -152,6 +152,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="ResolutionManager.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="Apple.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="ResolutionManager.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="TextureLoader.h" />
   </ItemGroup>

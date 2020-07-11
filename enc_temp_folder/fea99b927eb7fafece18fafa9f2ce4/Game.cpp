@@ -138,19 +138,11 @@ void Game::renderScore()
 
 void Game::renderSpeed()
 {
-	std::string roundedSpeed = std::to_string(movesPerSecond);
-
-	//truncates additional numbers after floating point
-	if (roundedSpeed.size() > 10)
-		roundedSpeed.erase(10);
-
+	std::string roundedSpeed = std::to_string(movesPerSecond).erase(10);
 	std::string speedStr = "Speed:" + roundedSpeed;
 
-	//renderText only works with const char*
 	const char* speedChar = speedStr.c_str();
 	SDL_Texture* score = TextureLoader::LoadText(speedChar, 20);
-	
-	// where the text should be displayed
 	SDL_Rect src, dest;
 
 	src.x = src.y = 0;

@@ -33,20 +33,21 @@ void Snake::addNode(int x, int y)
     }
 }
 
-void Snake::setDirection(std::string newDirection)
+bool Snake::setDirection(std::string newDirection)
 {
     if (direction == newDirection)
-        return;
+        return false;
     if (direction == "Left" && newDirection == "Right")
-        return;
+        return false;
     if (direction == "Right" && newDirection == "Left")
-        return;
+        return false;
     if (direction == "Up" && newDirection == "Down")
-        return;
+        return false;
     if (direction == "Down" && newDirection == "Up")
-        return;
+        return false ;
 
     direction = newDirection;
+    return true;
 }
 
 void Snake::update()
