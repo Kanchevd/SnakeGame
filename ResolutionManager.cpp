@@ -16,7 +16,7 @@ ResolutionManager::~ResolutionManager()
 
 std::tuple<int, int> ResolutionManager::chooseResolution()
 {
-	int choice , i, width, height, size = resolutions.size();
+	int choice = 0, i, width, height, size = resolutions.size();
 	
 
 	for (i = 0; i < size; i++)
@@ -28,7 +28,7 @@ std::tuple<int, int> ResolutionManager::chooseResolution()
 	std::cout << "Choose your resolution:";
 	std::cin >> choice;
 
-	while (choice < 1 || choice >= size)
+	while (choice < 1 || choice > size)
 	{
 		std::cout << "Invalid choice, try again." << "\n";
 		std::cout << "Choose your resolution:";
