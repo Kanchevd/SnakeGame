@@ -18,14 +18,14 @@ public:
 	~Game();
 
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
-	void handleEvent();
-	void update(double frameTime, bool forced);
+	bool handleEvent();
+	void update(int frameTime, bool forced);
 	void render();
 	void clean();
-	void renderScore();
-	void renderSpeed();
-
+	void renderAllText();
+	void renderTextField(std::string text, int number, SDL_Rect src, SDL_Rect dest, int fontSize, SDL_Color color);
 	bool running() { return isRunning; }
+	void calcFPS(int frameTime);
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 
@@ -35,11 +35,8 @@ private:
 	bool isRunning;
 	SDL_Window *window;
 	int score;
-	double movementCap;
-	double movesPerSecond;
-	double timeToMove;
-	double passedTime;
-	int FPS;
-	
+	int movementCap;
+	int movesPerSecond, timeToMove;
+	int passedTime, absoluteTime, frameTracker, FPS, tempFPS; 	
 };
 #endif // !Game_hpp

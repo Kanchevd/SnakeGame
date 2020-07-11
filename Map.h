@@ -1,8 +1,7 @@
 #pragma once
+
 #include "Game.h";
 #include "Snake.h";
-
-
 class Map
 {
 public: 
